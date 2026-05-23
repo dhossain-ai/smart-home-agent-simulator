@@ -1,0 +1,29 @@
+[
+  {
+    "device_type": "air_conditioner",
+    "room": "guest_bedroom",
+    "dislike_interval": {
+      "start": "10:00",
+      "end": "13:00"
+    },
+    "reason": "user preference: avoid air_conditioner in guest_bedroom during this time"
+  },
+  {
+    "device_type": "light",
+    "room": "corridor",
+    "dislike_interval": {
+      "start": "11:00",
+      "end": "14:00"
+    },
+    "reason": "user preference: avoid light in corridor during this time"
+  },
+  {
+    "device_type": "aromatherapy",
+    "room": "balcony",
+    "dislike_interval": {
+      "start": "10:00",
+      "end": "13:00"
+    },
+    "reason": "user preference: avoid aromatherapy in balcony during this time"
+  }
+]

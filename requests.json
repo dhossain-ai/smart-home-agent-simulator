@@ -1,0 +1,711 @@
+[
+  {
+    "id": "home59_one_526",
+    "input": "Increase the brightness of the light in the corridor by 66%.",
+    "output": [
+      {
+        "execution": "error_input"
+      }
+    ],
+    "issued_at": "12:30"
+  },
+  {
+    "id": "home12_one_221",
+    "input": "Set the dehumidifiers in the guest bedroom to auto mode.",
+    "output": [
+      {
+        "execution": "success",
+        "affordance": "http://localhost:8080/workspaces/home12/guest_bedroom/artifacts/guestBedroomDehumidifiers/set_mode",
+        "params": {
+          "mode": "auto"
+        },
+        "test": {
+          "property": "http://localhost:8080/workspaces/home12/guest_bedroom/artifacts/guestBedroomDehumidifiers/properties/mode",
+          "expected_value": "auto"
+        }
+      }
+    ],
+    "issued_at": "07:45"
+  },
+  {
+    "id": "home65_one_403",
+    "input": "Set the intensity of the aromatherapy in the foyer to 50%.",
+    "output": [
+      {
+        "execution": "success",
+        "affordance": "http://localhost:8080/workspaces/home65/foyer/artifacts/foyerAromatherapy/set_intensity",
+        "params": {
+          "intensity": 50
+        },
+        "test": {
+          "property": "http://localhost:8080/workspaces/home65/foyer/artifacts/foyerAromatherapy/properties/intensity",
+          "expected_value": 50
+        }
+      }
+    ],
+    "issued_at": "08:15"
+  },
+  {
+    "id": "home71_one_101",
+    "input": "Increase the air conditioner temperature in the guest bedroom by 6 degrees.",
+    "output": [
+      {
+        "execution": "error_input"
+      }
+    ],
+    "issued_at": "11:45"
+  },
+  {
+    "id": "home70_one_397",
+    "input": "Raise the curtain in the study room by 30 percent.",
+    "output": [
+      {
+        "execution": "success",
+        "affordance": "http://localhost:8080/workspaces/home70/study_room/artifacts/studyRoomCurtain/set_degree",
+        "params": {
+          "degree": 30
+        },
+        "test": {
+          "property": "http://localhost:8080/workspaces/home70/study_room/artifacts/studyRoomCurtain/properties/degree",
+          "expected_value": 30
+        }
+      }
+    ],
+    "issued_at": "13:00"
+  },
+  {
+    "id": "home1_one_102",
+    "input": "Set the interval of the aromatherapy device to 50 in the master bedroom.",
+    "output": [
+      {
+        "execution": "success",
+        "affordance": "http://localhost:8080/workspaces/home1/master_bedroom/artifacts/masterBedroomAromatherapy/set_interval",
+        "params": {
+          "interval": 50
+        },
+        "test": {
+          "property": "http://localhost:8080/workspaces/home1/master_bedroom/artifacts/masterBedroomAromatherapy/properties/interval",
+          "expected_value": 50
+        }
+      }
+    ],
+    "issued_at": "14:20"
+  },
+  {
+    "id": "home32_one_227",
+    "input": "Set the curtain degree to 50 in the living room.",
+    "output": [
+      {
+        "execution": "success",
+        "affordance": "http://localhost:8080/workspaces/home32/living_room/artifacts/livingRoomCurtain/set_degree",
+        "params": {
+          "degree": 50
+        },
+        "test": {
+          "property": "http://localhost:8080/workspaces/home32/living_room/artifacts/livingRoomCurtain/properties/degree",
+          "expected_value": 50
+        }
+      }
+    ],
+    "issued_at": "15:30"
+  },
+  {
+    "id": "home66_one_397",
+    "input": "Decrease the brightness of the light in the corridor by 23 percent.",
+    "output": [
+      {
+        "execution": "success",
+        "affordance": "http://localhost:8080/workspaces/home66/corridor/artifacts/corridorLight/set_brightness",
+        "params": {
+          "brightness": 60
+        },
+        "test": {
+          "property": "http://localhost:8080/workspaces/home66/corridor/artifacts/corridorLight/properties/brightness",
+          "expected_value": 60
+        }
+      }
+    ],
+    "issued_at": "16:45"
+  },
+  {
+    "id": "home50_one_543",
+    "input": "Increase the brightness of the light in the garage by 7 percent.",
+    "output": [
+      {
+        "execution": "success",
+        "affordance": "http://localhost:8080/workspaces/home50/garage/artifacts/garageLight/set_brightness",
+        "params": {
+          "brightness": 90
+        },
+        "test": {
+          "property": "http://localhost:8080/workspaces/home50/garage/artifacts/garageLight/properties/brightness",
+          "expected_value": 90
+        }
+      }
+    ],
+    "issued_at": "18:00"
+  },
+  {
+    "id": "home75_one_312",
+    "input": "Set the brightness of the light to 80% in the study room.",
+    "output": [
+      {
+        "execution": "success",
+        "affordance": "http://localhost:8080/workspaces/home75/study_room/artifacts/studyRoomLight/set_brightness",
+        "params": {
+          "brightness": 80
+        },
+        "test": {
+          "property": "http://localhost:8080/workspaces/home75/study_room/artifacts/studyRoomLight/properties/brightness",
+          "expected_value": 80
+        }
+      }
+    ],
+    "issued_at": "19:15"
+  },
+  {
+    "id": "home28_one_201",
+    "input": "Set the fan speed of the air conditioner to high in the guest bedroom.",
+    "output": [
+      {
+        "execution": "success",
+        "affordance": "http://localhost:8080/workspaces/home28/guest_bedroom/artifacts/guestBedroomAirConditioner/set_fan_speed",
+        "params": {
+          "fan_speed": "high"
+        },
+        "test": {
+          "property": "http://localhost:8080/workspaces/home28/guest_bedroom/artifacts/guestBedroomAirConditioner/properties/fan_speed",
+          "expected_value": "high"
+        }
+      }
+    ],
+    "issued_at": "20:30"
+  },
+  {
+    "id": "home56_one_478",
+    "input": "Set the brightness of the light in the store room to 30.",
+    "output": [
+      {
+        "execution": "success",
+        "affordance": "http://localhost:8080/workspaces/home56/store_room/artifacts/storeRoomLight/set_brightness",
+        "params": {
+          "brightness": 30
+        },
+        "test": {
+          "property": "http://localhost:8080/workspaces/home56/store_room/artifacts/storeRoomLight/properties/brightness",
+          "expected_value": 30
+        }
+      }
+    ],
+    "issued_at": "21:45"
+  },
+  {
+    "id": "home15_one_1188",
+    "input": "Set the fan speed to automatic in the study room.",
+    "output": [
+      {
+        "execution": "error_input"
+      }
+    ],
+    "issued_at": "08:15"
+  },
+  {
+    "id": "home39_one_923",
+    "input": "Open the curtains in the living room completely.",
+    "output": [
+      {
+        "execution": "error_input"
+      }
+    ],
+    "issued_at": "09:30"
+  },
+  {
+    "id": "home80_one_617",
+    "input": "Set the brightness of the light to 90 in the master bedroom.",
+    "output": [
+      {
+        "execution": "error_input"
+      }
+    ],
+    "issued_at": "10:45"
+  },
+  {
+    "id": "home26_one_855",
+    "input": "Set the brightness of the light in the corridor to 30%.",
+    "output": [
+      {
+        "execution": "error_input"
+      }
+    ],
+    "issued_at": "12:00"
+  },
+  {
+    "id": "home10_one_814",
+    "input": "Set the brightness of the light in the corridor to 60.",
+    "output": [
+      {
+        "execution": "error_input"
+      }
+    ],
+    "issued_at": "13:15"
+  },
+  {
+    "id": "home36_one_945",
+    "input": "Turn on the fan in the living room.",
+    "output": [
+      {
+        "execution": "error_input"
+      }
+    ],
+    "issued_at": "14:30"
+  },
+  {
+    "id": "home57_one_825",
+    "input": "Lower the heating temperature in the guest bedroom by 8 degrees.",
+    "output": [
+      {
+        "execution": "error_input"
+      }
+    ],
+    "issued_at": "15:45"
+  },
+  {
+    "id": "home18_one_760",
+    "input": "Turn off the dehumidifier in the guest bedroom.",
+    "output": [
+      {
+        "execution": "error_input"
+      }
+    ],
+    "issued_at": "17:00"
+  },
+  {
+    "id": "home71_one_1240",
+    "input": "Set the intensity of the dehumidifier to 100 in the study room.",
+    "output": [
+      {
+        "execution": "error_input"
+      }
+    ],
+    "issued_at": "18:15"
+  },
+  {
+    "id": "home70_one_903",
+    "input": "Increase the degree of the curtain by 40% in the guest bedroom.",
+    "output": [
+      {
+        "execution": "error_input"
+      }
+    ],
+    "issued_at": "19:30"
+  },
+  {
+    "id": "home17_one_1146",
+    "input": "Pause the media player in the balcony.",
+    "output": [
+      {
+        "execution": "error_input"
+      }
+    ],
+    "issued_at": "20:45"
+  },
+  {
+    "id": "home48_one_462",
+    "input": "Set the brightness of the light to 50 in the master bedroom.",
+    "output": [
+      {
+        "execution": "error_input"
+      }
+    ],
+    "issued_at": "22:00"
+  },
+  {
+    "id": "home46_multi_48",
+    "input": "Turn off the air conditioner and set the swing to the middle position in the guest bedroom.",
+    "output": [
+      {
+        "execution": "success",
+        "affordance": "http://localhost:8080/workspaces/home46/guest_bedroom/artifacts/guestBedroomAirConditioner/turn_off",
+        "params": {},
+        "test": {
+          "property": "http://localhost:8080/workspaces/home46/guest_bedroom/artifacts/guestBedroomAirConditioner/properties/state",
+          "expected_value": "off"
+        }
+      },
+      {
+        "execution": "success",
+        "affordance": "http://localhost:8080/workspaces/home46/guest_bedroom/artifacts/guestBedroomAirConditioner/set_swing",
+        "params": {
+          "swing": "middle"
+        },
+        "test": {
+          "property": "http://localhost:8080/workspaces/home46/guest_bedroom/artifacts/guestBedroomAirConditioner/properties/swing",
+          "expected_value": "middle"
+        }
+      }
+    ],
+    "issued_at": "07:30"
+  },
+  {
+    "id": "home73_multi_93",
+    "input": "Decrease the volume of the media player by 84% in the master bedroom, then decrease it by 14%, and finally increase the degree of the curtain by 50% in the master bedroom.",
+    "output": [
+      {
+        "execution": "success",
+        "affordance": "http://localhost:8080/workspaces/home73/master_bedroom/artifacts/masterBedroomMediaPlayer/set_volume",
+        "params": {
+          "volume": 0
+        },
+        "test": {
+          "property": "http://localhost:8080/workspaces/home73/master_bedroom/artifacts/masterBedroomMediaPlayer/properties/volume",
+          "expected_value": 0
+        }
+      },
+      {
+        "execution": "success",
+        "affordance": "http://localhost:8080/workspaces/home73/master_bedroom/artifacts/masterBedroomMediaPlayer/set_volume",
+        "params": {
+          "volume": 70
+        },
+        "test": {
+          "property": "http://localhost:8080/workspaces/home73/master_bedroom/artifacts/masterBedroomMediaPlayer/properties/volume",
+          "expected_value": 70
+        }
+      },
+      {
+        "execution": "success",
+        "affordance": "http://localhost:8080/workspaces/home73/master_bedroom/artifacts/masterBedroomCurtain/set_degree",
+        "params": {
+          "degree": 50
+        },
+        "test": {
+          "property": "http://localhost:8080/workspaces/home73/master_bedroom/artifacts/masterBedroomCurtain/properties/degree",
+          "expected_value": 50
+        }
+      }
+    ],
+    "issued_at": "08:45"
+  },
+  {
+    "id": "home35_multi_77",
+    "input": "Lower the air conditioner temperature in the guest bedroom to 20 degrees, decrease the air conditioner temperature in the master bedroom by 8 degrees, and set the intensity of the aromatherapy device to 0 in the living room.",
+    "output": [
+      {
+        "execution": "success",
+        "affordance": "http://localhost:8080/workspaces/home35/guest_bedroom/artifacts/guestBedroomAirConditioner/set_temperature",
+        "params": {
+          "temperature": 20
+        },
+        "test": {
+          "property": "http://localhost:8080/workspaces/home35/guest_bedroom/artifacts/guestBedroomAirConditioner/properties/temperature",
+          "expected_value": 20
+        }
+      },
+      {
+        "execution": "success",
+        "affordance": "http://localhost:8080/workspaces/home35/master_bedroom/artifacts/masterBedroomAirConditioner/set_temperature",
+        "params": {
+          "temperature": 16
+        },
+        "test": {
+          "property": "http://localhost:8080/workspaces/home35/master_bedroom/artifacts/masterBedroomAirConditioner/properties/temperature",
+          "expected_value": 16
+        }
+      },
+      {
+        "execution": "success",
+        "affordance": "http://localhost:8080/workspaces/home35/living_room/artifacts/livingRoomAromatherapy/set_intensity",
+        "params": {
+          "intensity": 0
+        },
+        "test": {
+          "property": "http://localhost:8080/workspaces/home35/living_room/artifacts/livingRoomAromatherapy/properties/intensity",
+          "expected_value": 0
+        }
+      }
+    ],
+    "issued_at": "10:00"
+  },
+  {
+    "id": "home81_multi_57",
+    "input": "Set the intensity of the aromatherapy device on the balcony to 70%, adjust the intensity of the humidifier in the study room to 50%, and increase the heating temperature in the bathroom by 14 degrees.",
+    "output": [
+      {
+        "execution": "error_input"
+      },
+      {
+        "execution": "success",
+        "affordance": "http://localhost:8080/workspaces/home81/study_room/artifacts/studyRoomHumidifier/set_intensity",
+        "params": {
+          "intensity": 50
+        },
+        "test": {
+          "property": "http://localhost:8080/workspaces/home81/study_room/artifacts/studyRoomHumidifier/properties/intensity",
+          "expected_value": 50
+        }
+      },
+      {
+        "execution": "success",
+        "affordance": "http://localhost:8080/workspaces/home81/bathroom/artifacts/bathroomHeating/set_temperature",
+        "params": {
+          "temperature": 30
+        },
+        "test": {
+          "property": "http://localhost:8080/workspaces/home81/bathroom/artifacts/bathroomHeating/properties/temperature",
+          "expected_value": 30
+        }
+      }
+    ],
+    "issued_at": "11:15"
+  },
+  {
+    "id": "home37_multi_74",
+    "input": "Set the brightness of the light to 40 in the guest bedroom, change the mode of the dehumidifiers to sleep in the study room, and turn on the fan in the living room.",
+    "output": [
+      {
+        "execution": "success",
+        "affordance": "http://localhost:8080/workspaces/home37/guest_bedroom/artifacts/guestBedroomLight/set_brightness",
+        "params": {
+          "brightness": 40
+        },
+        "test": {
+          "property": "http://localhost:8080/workspaces/home37/guest_bedroom/artifacts/guestBedroomLight/properties/brightness",
+          "expected_value": 40
+        }
+      },
+      {
+        "execution": "success",
+        "affordance": "http://localhost:8080/workspaces/home37/study_room/artifacts/studyRoomDehumidifiers/set_mode",
+        "params": {
+          "mode": "sleep"
+        },
+        "test": {
+          "property": "http://localhost:8080/workspaces/home37/study_room/artifacts/studyRoomDehumidifiers/properties/mode",
+          "expected_value": "sleep"
+        }
+      },
+      {
+        "execution": "success",
+        "affordance": "http://localhost:8080/workspaces/home37/living_room/artifacts/livingRoomFan/turn_on",
+        "params": {},
+        "test": {
+          "property": "http://localhost:8080/workspaces/home37/living_room/artifacts/livingRoomFan/properties/state",
+          "expected_value": "on"
+        }
+      }
+    ],
+    "issued_at": "12:30"
+  },
+  {
+    "id": "home41_multi_39",
+    "input": "Increase the brightness of the light in the foyer by 17 percent and set the volume of the media player on the balcony to 20.",
+    "output": [
+      {
+        "execution": "success",
+        "affordance": "http://localhost:8080/workspaces/home41/foyer/artifacts/foyerLight/set_brightness",
+        "params": {
+          "brightness": 100
+        },
+        "test": {
+          "property": "http://localhost:8080/workspaces/home41/foyer/artifacts/foyerLight/properties/brightness",
+          "expected_value": 100
+        }
+      },
+      {
+        "execution": "success",
+        "affordance": "http://localhost:8080/workspaces/home41/balcony/artifacts/balconyMediaPlayer/set_volume",
+        "params": {
+          "volume": 20
+        },
+        "test": {
+          "property": "http://localhost:8080/workspaces/home41/balcony/artifacts/balconyMediaPlayer/properties/volume",
+          "expected_value": 20
+        }
+      }
+    ],
+    "issued_at": "13:45"
+  },
+  {
+    "id": "home2_multi_10",
+    "input": "Raise the curtain by 100% in the guest bedroom and decrease the volume of the media player by 10% in the garage.",
+    "output": [
+      {
+        "execution": "success",
+        "affordance": "http://localhost:8080/workspaces/home2/guest_bedroom/artifacts/guestBedroomCurtain/set_degree",
+        "params": {
+          "degree": 100
+        },
+        "test": {
+          "property": "http://localhost:8080/workspaces/home2/guest_bedroom/artifacts/guestBedroomCurtain/properties/degree",
+          "expected_value": 100
+        }
+      },
+      {
+        "execution": "success",
+        "affordance": "http://localhost:8080/workspaces/home2/garage/artifacts/garageMediaPlayer/set_volume",
+        "params": {
+          "volume": 20
+        },
+        "test": {
+          "property": "http://localhost:8080/workspaces/home2/garage/artifacts/garageMediaPlayer/properties/volume",
+          "expected_value": 20
+        }
+      }
+    ],
+    "issued_at": "15:00"
+  },
+  {
+    "id": "home16_multi_32",
+    "input": "Increase the brightness of the light in the master bedroom by 18 percent and set the interval of the aromatherapy in the master bedroom to 10.",
+    "output": [
+      {
+        "execution": "success",
+        "affordance": "http://localhost:8080/workspaces/home16/master_bedroom/artifacts/masterBedroomLight/set_brightness",
+        "params": {
+          "brightness": 100
+        },
+        "test": {
+          "property": "http://localhost:8080/workspaces/home16/master_bedroom/artifacts/masterBedroomLight/properties/brightness",
+          "expected_value": 100
+        }
+      },
+      {
+        "execution": "success",
+        "affordance": "http://localhost:8080/workspaces/home16/master_bedroom/artifacts/masterBedroomAromatherapy/set_interval",
+        "params": {
+          "interval": 10
+        },
+        "test": {
+          "property": "http://localhost:8080/workspaces/home16/master_bedroom/artifacts/masterBedroomAromatherapy/properties/interval",
+          "expected_value": 10
+        }
+      }
+    ],
+    "issued_at": "16:15"
+  },
+  {
+    "id": "home56_multi_74",
+    "input": "Set the interval of the aromatherapy device on the balcony to 20 minutes, increase the interval by 8 seconds, and close the blinds in the garage.",
+    "output": [
+      {
+        "execution": "success",
+        "affordance": "http://localhost:8080/workspaces/home56/balcony/artifacts/balconyAromatherapy/set_interval",
+        "params": {
+          "interval": 20
+        },
+        "test": {
+          "property": "http://localhost:8080/workspaces/home56/balcony/artifacts/balconyAromatherapy/properties/interval",
+          "expected_value": 20
+        }
+      },
+      {
+        "execution": "success",
+        "affordance": "http://localhost:8080/workspaces/home56/garage/artifacts/garageBlinds/close",
+        "params": {},
+        "test": {
+          "property": "http://localhost:8080/workspaces/home56/garage/artifacts/garageBlinds/properties/state",
+          "expected_value": "closed"
+        }
+      },
+      {
+        "execution": "success",
+        "affordance": "http://localhost:8080/workspaces/home56/balcony/artifacts/balconyAromatherapy/set_interval",
+        "params": {
+          "interval": 50
+        },
+        "test": {
+          "property": "http://localhost:8080/workspaces/home56/balcony/artifacts/balconyAromatherapy/properties/interval",
+          "expected_value": 50
+        }
+      }
+    ],
+    "issued_at": "17:30"
+  },
+  {
+    "id": "home63_multi_42",
+    "input": "Set the swing of the air conditioner to the middle and adjust the brightness of the light in the garage to 80.",
+    "output": [
+      {
+        "execution": "success",
+        "affordance": "http://localhost:8080/workspaces/home63/guest_bedroom/artifacts/guestBedroomAirConditioner/set_swing",
+        "params": {
+          "swing": "middle"
+        },
+        "test": {
+          "property": "http://localhost:8080/workspaces/home63/guest_bedroom/artifacts/guestBedroomAirConditioner/properties/swing",
+          "expected_value": "middle"
+        }
+      },
+      {
+        "execution": "success",
+        "affordance": "http://localhost:8080/workspaces/home63/garage/artifacts/garageLight/set_brightness",
+        "params": {
+          "brightness": 80
+        },
+        "test": {
+          "property": "http://localhost:8080/workspaces/home63/garage/artifacts/garageLight/properties/brightness",
+          "expected_value": 80
+        }
+      }
+    ],
+    "issued_at": "18:45"
+  },
+  {
+    "id": "home62_multi_29",
+    "input": "Turn off the aromatherapy in the corridor and raise the heating temperature in the study room by 1 degree.",
+    "output": [
+      {
+        "execution": "success",
+        "affordance": "http://localhost:8080/workspaces/home62/corridor/artifacts/corridorAromatherapy/set_intensity",
+        "params": {
+          "intensity": 0
+        },
+        "test": {
+          "property": "http://localhost:8080/workspaces/home62/corridor/artifacts/corridorAromatherapy/properties/intensity",
+          "expected_value": 0
+        }
+      },
+      {
+        "execution": "success",
+        "affordance": "http://localhost:8080/workspaces/home62/study_room/artifacts/studyRoomHeating/set_temperature",
+        "params": {
+          "temperature": 30
+        },
+        "test": {
+          "property": "http://localhost:8080/workspaces/home62/study_room/artifacts/studyRoomHeating/properties/temperature",
+          "expected_value": 30
+        }
+      }
+    ],
+    "issued_at": "20:00"
+  },
+  {
+    "id": "home70_multi_9",
+    "input": "Set the brightness of the light in the corridor to 100 and in the bathroom to 80.",
+    "output": [
+      {
+        "execution": "success",
+        "affordance": "http://localhost:8080/workspaces/home70/corridor/artifacts/corridorLight/set_brightness",
+        "params": {
+          "brightness": 100
+        },
+        "test": {
+          "property": "http://localhost:8080/workspaces/home70/corridor/artifacts/corridorLight/properties/brightness",
+          "expected_value": 100
+        }
+      },
+      {
+        "execution": "success",
+        "affordance": "http://localhost:8080/workspaces/home70/bathroom/artifacts/bathroomLight/set_brightness",
+        "params": {
+          "brightness": 80
+        },
+        "test": {
+          "property": "http://localhost:8080/workspaces/home70/bathroom/artifacts/bathroomLight/properties/brightness",
+          "expected_value": 80
+        }
+      }
+    ],
+    "issued_at": "21:15"
+  }
+]
