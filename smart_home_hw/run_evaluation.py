@@ -2,7 +2,15 @@
 Entry point for evaluating RequestSolver strategies on the homework test set.
 
 Usage:
-    python run_evaluation.py
+    python smart_home_hw/run_evaluation.py
+
+Optional debug limit:
+    PowerShell:
+        $env:EVAL_LIMIT="5"
+        python smart_home_hw/run_evaluation.py
+
+    Bash:
+        EVAL_LIMIT=5 python smart_home_hw/run_evaluation.py
 
 This script:
     1. Loads requests and preferences from ../requests.json and ../preferences.json
@@ -234,13 +242,13 @@ def main() -> int:
         print(f"  Expected: {prefs_file}")
         return 1
 
-     requests = load_requests(requests_file)
-preferences = load_preferences(prefs_file)
+    requests = load_requests(requests_file)
+    preferences = load_preferences(prefs_file)
 
-limit = int(os.getenv("EVAL_LIMIT", "0"))
-if limit > 0:
-    requests = requests[:limit]
-    print(f"Debug limit enabled: evaluating first {limit} requests")
+    limit = int(os.getenv("EVAL_LIMIT", "0"))
+    if limit > 0:
+        requests = requests[:limit]
+        print(f"Debug limit enabled: evaluating first {limit} requests")
 
     print(f"\nLoaded {len(requests)} requests")
     print(f"Loaded {len(preferences)} preferences")
