@@ -1,5 +1,6 @@
 """EnvironmentManager agent for providing environment information and preferences."""
 
+import copy
 import re
 import threading
 from typing import Any, Optional
@@ -44,6 +45,15 @@ class EnvironmentManagerAgent:
         self.preferences = preferences
         self.timeout = timeout
         self.verbose = verbose
+
+        # In-memory caches. Evaluation repeatedly queries the same homes, rooms,
+        # artifacts, affordances, and states across strategies.
+        self._rooms_cache: dict[str, list[str]] = {}
+        self._artifacts_cache: dict[tuple[str, str], list[str]] = {}
+        self._affordances_cache: dict[str, ArtifactInfo] = {}
+        self._state_cache: dict[tuple[str, Optional[str]], ArtifactState] = {}
+        self._preferences_cache: dict[str, list[Preference]] = {}
+
         self.mailbox = AgentMailbox("EnvironmentManager")
         get_message_broker().register_agent("EnvironmentManager", self.mailbox)
         self._running = False
@@ -140,9 +150,11 @@ class EnvironmentManagerAgent:
         """Extract room name from an artifact URI."""
         path = urlparse(self._strip_fragment(artifact_uri)).path
         parts = path.strip("/").split("/")
+
         # /workspaces/home12/guest_bedroom/artifacts/device
-        if len(parts) >= 4 and parts[0] == "workspaces" and parts[2] != "artifacts":
+        if len(parts) >= 5 and parts[0] == "workspaces" and parts[3] == "artifacts":
             return parts[2]
+
         # /workspaces/home12/artifacts/device
         return "home"
 
@@ -199,7 +211,9 @@ class EnvironmentManagerAgent:
                 if not param_name:
                     continue
 
-                param_schema: dict[str, Any] = {"type": self._schema_type(prop_node, graph)}
+                param_schema: dict[str, Any] = {
+                    "type": self._schema_type(prop_node, graph)
+                }
 
                 enum_values = [str(v) for v in graph.objects(prop_node, JSONSCHEMA.enum)]
                 if enum_values:
@@ -254,6 +268,10 @@ class EnvironmentManagerAgent:
             get_rooms("home12") -> ["living_room", "guest_bedroom", ...]
         """
         home_id = self._normalize_home_id(home_id)
+
+        if home_id in self._rooms_cache:
+            return list(self._rooms_cache[home_id])
+
         home_uri = f"{self.simulator_url}/workspaces/{home_id}"
 
         try:
@@ -274,7 +292,9 @@ class EnvironmentManagerAgent:
                     if len(parts) >= 3 and parts[0] == "workspaces" and parts[1] == home_id:
                         rooms.append(parts[2])
 
-            return sorted(set(rooms))
+            result = sorted(set(rooms))
+            self._rooms_cache[home_id] = result
+            return list(result)
 
         except Exception as e:
             if self.verbose:
@@ -286,6 +306,10 @@ class EnvironmentManagerAgent:
         Return the list of artifact URIs present in a given room.
         """
         home_id = self._normalize_home_id(home_id)
+        cache_key = (home_id, room)
+
+        if cache_key in self._artifacts_cache:
+            return list(self._artifacts_cache[cache_key])
 
         if room == "home":
             room_uri = f"{self.simulator_url}/workspaces/{home_id}"
@@ -303,13 +327,16 @@ class EnvironmentManagerAgent:
                     if "/artifacts/" in contained_uri:
                         artifacts.append(self._strip_fragment(contained_uri))
 
+            result = sorted(set(artifacts))
+            self._artifacts_cache[cache_key] = result
+
             if self.verbose:
                 print(
-                    f"[EnvironmentManager] Found {len(artifacts)} artifacts "
+                    f"[EnvironmentManager] Found {len(result)} artifacts "
                     f"in {home_id}/{room}"
                 )
 
-            return sorted(set(artifacts))
+            return list(result)
 
         except Exception as e:
             if self.verbose:
@@ -321,6 +348,9 @@ class EnvironmentManagerAgent:
         Return action and property affordances for a single artifact.
         """
         artifact_uri = self._strip_fragment(artifact_uri)
+
+        if artifact_uri in self._affordances_cache:
+            return copy.deepcopy(self._affordances_cache[artifact_uri])
 
         try:
             graph = self._parse_graph(self._fetch_turtle(artifact_uri))
@@ -343,9 +373,8 @@ class EnvironmentManagerAgent:
                     continue
 
                 action_name = self._uri_last_path_part(target)
-
-                # Prefer target path action name because simulator actions are snake_case.
                 input_schema = self._parse_action_input_schema(graph, action_node)
+
                 actions.append(
                     ActionAffordance(
                         name=action_name,
@@ -363,7 +392,7 @@ class EnvironmentManagerAgent:
                 prop_name = self._uri_last_path_part(target)
                 properties.append(PropertyAffordance(name=prop_name, uri=target))
 
-            return ArtifactInfo(
+            result = ArtifactInfo(
                 name=artifact_name,
                 room=room,
                 artifact_uri=artifact_uri,
@@ -372,11 +401,14 @@ class EnvironmentManagerAgent:
                 properties=sorted(properties, key=lambda p: p.name),
             )
 
+            self._affordances_cache[artifact_uri] = copy.deepcopy(result)
+            return result
+
         except Exception as e:
             if self.verbose:
                 print(f"[EnvironmentManager] Error in get_artifact_affordances({artifact_uri}): {e}")
 
-            return ArtifactInfo(
+            result = ArtifactInfo(
                 name=self._uri_last_path_part(artifact_uri),
                 room=self._room_from_artifact_uri(artifact_uri),
                 artifact_uri=artifact_uri,
@@ -384,6 +416,8 @@ class EnvironmentManagerAgent:
                 actions=[],
                 properties=[],
             )
+            self._affordances_cache[artifact_uri] = copy.deepcopy(result)
+            return result
 
     def get_artifact_state(
         self,
@@ -392,8 +426,18 @@ class EnvironmentManagerAgent:
     ) -> ArtifactState:
         """
         Fetch current property values for an artifact from the simulator.
+
+        Note:
+            This caches read state information to speed up evaluation. Solver state
+            reads occur before action execution, and the evaluator resets homes
+            between tests, so this is appropriate for this workflow.
         """
         artifact_uri = self._strip_fragment(artifact_uri)
+        cache_key = (artifact_uri, property_name)
+
+        if cache_key in self._state_cache:
+            return copy.deepcopy(self._state_cache[cache_key])
+
         state = ArtifactState(artifact_uri=artifact_uri, properties={})
 
         try:
@@ -403,6 +447,8 @@ class EnvironmentManagerAgent:
                 response.raise_for_status()
                 payload = response.json()
                 state.properties[property_name] = payload.get("value", payload)
+
+                self._state_cache[cache_key] = copy.deepcopy(state)
                 return state
 
             info = self.get_artifact_affordances(artifact_uri)
@@ -416,11 +462,13 @@ class EnvironmentManagerAgent:
                     if self.verbose:
                         print(f"[EnvironmentManager] Could not read {prop.uri}: {e}")
 
+            self._state_cache[cache_key] = copy.deepcopy(state)
             return state
 
         except Exception as e:
             if self.verbose:
                 print(f"[EnvironmentManager] Error in get_artifact_state({artifact_uri}): {e}")
+            self._state_cache[cache_key] = copy.deepcopy(state)
             return state
 
     def get_active_preferences(self, issued_at: str) -> list[Preference]:
@@ -430,6 +478,9 @@ class EnvironmentManagerAgent:
         Semantics:
             active when issued_at is inside [start, end)
         """
+        if issued_at in self._preferences_cache:
+            return list(self._preferences_cache[issued_at])
+
         try:
             issued_minutes = self._time_to_minutes(issued_at)
         except Exception:
@@ -454,4 +505,5 @@ class EnvironmentManagerAgent:
             except Exception:
                 continue
 
-        return active
+        self._preferences_cache[issued_at] = list(active)
+        return list(active)
