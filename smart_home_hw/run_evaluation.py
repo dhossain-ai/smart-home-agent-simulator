@@ -234,11 +234,13 @@ def main() -> int:
         print(f"  Expected: {prefs_file}")
         return 1
 
-        limit = int(os.getenv("EVAL_LIMIT", "0"))
-    if limit > 0:
-        requests = requests[:limit]
-        print(f"Debug limit enabled: evaluating first {limit} requests")
-    preferences = load_preferences(prefs_file)
+     requests = load_requests(requests_file)
+preferences = load_preferences(prefs_file)
+
+limit = int(os.getenv("EVAL_LIMIT", "0"))
+if limit > 0:
+    requests = requests[:limit]
+    print(f"Debug limit enabled: evaluating first {limit} requests")
 
     print(f"\nLoaded {len(requests)} requests")
     print(f"Loaded {len(preferences)} preferences")
