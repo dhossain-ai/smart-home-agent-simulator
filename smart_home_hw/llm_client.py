@@ -1,49 +1,31 @@
-"""OpenAI LLM client for reasoning-capable models."""
+"""LLM client wrapper.
+
+Uses Gemini API through google-genai.
+Set GEMINI_API_KEY in the environment.
+"""
 
 import os
-from openai import OpenAI
-from dotenv import load_dotenv
+from google import genai
 
 
-load_dotenv()
-
-DEFAULT_MODEL = "gpt-5-nano"
+DEFAULT_MODEL = os.getenv("GEMINI_MODEL", "gemini-1.5-flash")
 
 
-def get_llm_client() -> OpenAI:
-    """
-    Create and return an OpenAI client using credentials from .env.
+def get_llm_client():
+    """Create Gemini client."""
+    api_key = os.getenv("GEMINI_API_KEY")
 
-    Returns:
-        OpenAI client instance
-    """
-    api_key = os.environ.get("OPENAI_API_KEY")
     if not api_key:
-        raise ValueError("OPENAI_API_KEY not set in environment")
-    return OpenAI(api_key=api_key)
+        raise ValueError("GEMINI_API_KEY not set in environment")
+
+    return genai.Client(api_key=api_key)
 
 
-def call_llm(
-    client: OpenAI,
-    prompt: str | list[dict],
-    model: str = DEFAULT_MODEL,
-) -> str:
-    """
-    Call the OpenAI Responses API for reasoning-capable models.
-
-    Args:
-        client: OpenAI client instance
-        prompt: Prompt string or list of message dicts
-        model: Model name (default gpt-5-nano)
-
-    Returns:
-        Response text string
-    """
-    if isinstance(prompt, str):
-        prompt = [{"role": "user", "content": prompt}]
-
-    response = client.responses.create(
-        model=model,
-        input=prompt,
+def call_llm(client, prompt: str) -> str:
+    """Call Gemini and return plain text."""
+    response = client.models.generate_content(
+        model=DEFAULT_MODEL,
+        contents=prompt,
     )
-    return response.output_text
+
+    return response.text or ""

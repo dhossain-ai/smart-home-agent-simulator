@@ -3,3 +3,4 @@ rdflib
 fastapi
 uvicorn
 pydantic
+google-genai
