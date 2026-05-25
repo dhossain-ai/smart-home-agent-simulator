@@ -269,6 +269,7 @@ def main() -> int:
     time.sleep(AGENT_STARTUP_DELAY)
 
     strategies = [
+    ("Full Context", FullContextSolver),
     ("Sequential Exploration", SequentialSolver),
     ("Semantic Classification", SemanticSolver),
 ]
